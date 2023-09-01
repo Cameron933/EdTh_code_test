@@ -1,7 +1,6 @@
-import React from "react";
-
-const DateFormatter = () => {
-  return <div></div>;
+const DateFormatter = (dob: string): string => {
+  const [year, month, day] = dob.split("-");
+  return `${day}/${month}/${year}`;
 };
 
 export default DateFormatter;

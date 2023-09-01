@@ -1,4 +1,5 @@
 import React from "react";
+import StudentTable from "./components/StudentTable";
 
 const App: React.FC = () => {
   return (
@@ -25,7 +26,7 @@ const App: React.FC = () => {
           fontSize: 20,
         }}
       >
-        Frontend Code Challenge
+        <StudentTable />
       </div>
     </div>
   );

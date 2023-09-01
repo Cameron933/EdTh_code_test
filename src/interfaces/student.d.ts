@@ -14,3 +14,9 @@ interface Address {
   postcode: string;
   suburb?: string;
 }
+
+interface StudentProfile {
+  id: number;
+  student_id: number;
+  image_url: string;
+}
