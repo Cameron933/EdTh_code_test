@@ -1,4 +1,6 @@
-function App() {
+import React from "react";
+
+const App: React.FC = () => {
   return (
     <div style={{ backgroundColor: "#2546ce", height: "100vh" }}>
       <div style={{ backgroundColor: "#17e07d", color: "white" }}>
@@ -27,6 +29,6 @@ function App() {
       </div>
     </div>
   );
-}
+};
 
 export default App;
