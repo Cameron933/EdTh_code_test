@@ -22,7 +22,7 @@ const App: React.FC = () => {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          height: "20%",
+          height: "40%",
           fontSize: 20,
         }}
       >
