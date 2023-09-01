@@ -98,13 +98,15 @@ const StudentTable = () => {
           ))}
         </Tbody>
       </Table>
-      <StudentDetailsModal
-        student={selectedStudent}
-        profileImage={selectedProfileImage}
-        isOpen={isOpen}
-        onClose={onClose}
-        onSaveEdit={handleEditSaving}
-      />
+      {selectedStudent && (
+        <StudentDetailsModal
+          student={selectedStudent}
+          profileImage={selectedProfileImage}
+          isOpen={isOpen}
+          onClose={onClose}
+          onSaveEdit={handleEditSaving}
+        />
+      )}
     </TableContainer>
   );
 };
