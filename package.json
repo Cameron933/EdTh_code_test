@@ -17,7 +17,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server:start": "node server.js"
+    "server:start": "node server.js",
+    "prettier": "prettier --write ."
   },
   "eslintConfig": {
     "extends": [
@@ -38,6 +39,10 @@
     ]
   },
   "devDependencies": {
-    "json-server": "^0.17.1"
+    "eslint": "^8.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-react-app": "^7.0.1",
+    "json-server": "^0.17.1",
+    "prettier": "3.0.3"
   }
 }

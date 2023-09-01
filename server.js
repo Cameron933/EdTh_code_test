@@ -1,8 +1,8 @@
-const jsonServer = require('json-server')
-const server = jsonServer.create()
-const router = jsonServer.router('db.json')
-const middlewares = jsonServer.defaults()
-const cors = require('cors');
+const jsonServer = require("json-server");
+const server = jsonServer.create();
+const router = jsonServer.router("db.json");
+const middlewares = jsonServer.defaults();
+const cors = require("cors");
 
 function isPrime(num) {
   if (num <= 1) return false;
@@ -13,33 +13,33 @@ function isPrime(num) {
 }
 
 const randomError = function (req, res, next) {
-  const magicNumber = Math.floor(Math.random() * 1000)
+  const magicNumber = Math.floor(Math.random() * 1000);
 
-  if(isPrime(magicNumber)) {
-    console.log('Generating random error')
-    return res.status(500).send("Something went wrong! (Note: this is intentional)")
+  if (isPrime(magicNumber)) {
+    console.log("Generating random error");
+    return res.status(500).send("Something went wrong! (Note: this is intentional)");
   }
-  next()
-}
+  next();
+};
 
 const randomDelay = function (req, res, next) {
-  const magicNumber = Math.floor(Math.random() * 300)
+  const magicNumber = Math.floor(Math.random() * 300);
 
-  if(isPrime(magicNumber)) {
-    console.log('Generating delay')
-    setTimeout(() => next(), 2000)
+  if (isPrime(magicNumber)) {
+    console.log("Generating delay");
+    setTimeout(() => next(), 2000);
   } else {
-    next()
+    next();
   }
-}
+};
 
 server.use(cors({ origin: true }));
-server.options('*', cors());
-server.use(randomError)
-server.use(randomDelay)
+server.options("*", cors());
+server.use(randomError);
+server.use(randomDelay);
 
-server.use(middlewares)
-server.use(router)
+server.use(middlewares);
+server.use(router);
 server.listen(5000, () => {
-  console.log('JSON Server is running')
-})
+  console.log("JSON Server is running");
+});
