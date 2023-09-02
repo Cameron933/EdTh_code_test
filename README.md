@@ -2,6 +2,40 @@
 
 This application allows school teachers to view and update student details.
 
+## File structure
+frontend/
+|-- .vscode/
+|-- build/
+|-- coverage/
+|-- node_modules/
+|-- public/
+|   |-- index.html
+|-- src/
+|   |-- components/
+|   |   |-- LoadingModal.tsx
+|   |   |-- StudentDetailsModal.tsx
+|   |   |-- StudentTable.tsx
+|   |   |-- StudentTableRow.tsx
+|   |-- interfaces/
+|   |   |-- student.d.ts
+|   |-- services/
+|   |   |-- useStudentDetailsModal.ts
+|   |   |-- useStudentTable.ts
+|   |-- utils/
+|   |   |-- axiosErrorHelper.ts
+|   |   |-- dateTimeFomatter.ts
+|   |-- App.tsx
+|   |-- index.tsx
+|   |-- setupTests.ts
+|-- .eslintrc.json
+|-- .prettierignore
+|-- .gitignore
+|-- package.json
+|-- jest.config.js
+|-- db.json
+|-- README.md
+|-- tsconfig.json
+
 ### 🤔 Assumptions
 
 - All users of this system are teachers. Hence, there's no need for authentication and login functionalities.
