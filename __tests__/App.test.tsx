@@ -16,4 +16,12 @@ describe("App", () => {
   //   it("should renders StudentTable component with mockData in success", () => {
 
   //   });
+
+  //   it("should open StudentDetailsModal with mockData in success", () => {
+
+  //   });
+
+  //   it("should update Student first & last name in success", () => {
+
+  //   });
 });
