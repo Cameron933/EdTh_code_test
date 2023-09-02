@@ -9,6 +9,10 @@ import {
   ModalCloseButton,
   Button,
   Stack,
+  Flex,
+  Image,
+  Text,
+  Input,
 } from "@chakra-ui/react";
 import useStudentDetailsModal from "../services/useStudentDetailsModal";
 import LoadingModal from "./LoadingModal";
@@ -57,25 +61,32 @@ const StudentDetailsModal = ({ student, isOpen, onClose, onSaveEdit }: StudentTa
           <ModalCloseButton />
           <ModalBody>
             {student && studentProfile ? (
-              <>
-                <img
-                  src={studentProfile.image_url}
-                  alt={`student pic of ${student.first_name} ${student.last_name}`}
-                />
-                <input
+              <Flex direction="column" alignItems="start">
+                <Flex justifyContent="center" alignItems="center" mb={4}>
+                  <Image
+                    boxSize="150px"
+                    src={studentProfile.image_url}
+                    alt={`student pic of ${student.first_name} ${student.last_name}`}
+                  />
+                </Flex>
+                <Input
                   value={studentFirstName}
                   onChange={(e) => setStudentFirstName(e.target.value)}
+                  placeholder="First Name"
                 />
-                <input
+                <Input
                   value={studentLastName}
                   onChange={(e) => setStudentLastName(e.target.value)}
+                  placeholder="Last Name"
+                  my="2"
                 />
-                <p>Date of Birth: {student.date_of_birth}</p>
-                <p>Street line 1: {student.address.street_line1}</p>
-                <p>Street line 2: {student.address.street_line2}</p>
-                <p>Country: {student.address.country}</p>
-                <p>Postcode: {student.address.postcode}</p>
-              </>
+
+                <Text>Date of Birth: {student.date_of_birth}</Text>
+                <Text>Street line 1: {student.address.street_line1}</Text>
+                <Text>Street line 2: {student.address.street_line2}</Text>
+                <Text>Country: {student.address.country}</Text>
+                <Text>Postcode: {student.address.postcode}</Text>
+              </Flex>
             ) : null}
           </ModalBody>
           <ModalFooter>
