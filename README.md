@@ -1,3 +1,39 @@
+# 🚀 School Management App
+
+This application allows school teachers to view and update student details.
+
+## 🤔 Assumptions
+
+- All users of this system are teachers. Hence, there's no need for authentication and login functionalities.
+- No error handling for backend-related errors is necessary.
+
+## 🤓 How to set up this repo?
+
+1. Clone this repository to your local machine.
+2. Install all dependencies by running:
+
+```
+npm install
+```
+
+Then you all set!
+
+## 📦 Packages
+
+## 📚 Technologies Used
+
+| Category           | Technology                      |
+| ------------------ | ------------------------------- |
+| Framework          | `react`                         |
+| BootStrapper       | `create-react-app`              |
+| Scripting Language | `typescript`                    |
+| Styling            | chakra-ui                       |
+| State-Management   | (TBD)                           |
+| Testing            | `jest`, `react-testing-library` |
+| Localisation       | (TBD)                           |
+| Code Control       | `eslint`, `prettier`            |
+| CI/CD              | (TBD)                           |
+
 # Context
 
 In a school, often teachers needs view and update student details.
