@@ -33,8 +33,10 @@ const StudentTable = () => {
     <TableContainer>
       <VStack>
         <Table variant="simple" color="white">
-          <TableCaption>View and update student details by clicking the row</TableCaption>
-          <Thead>
+          <TableCaption textColor="gray.900">
+            View and update student details by clicking the row
+          </TableCaption>
+          <Thead bg="white">
             <Tr>
               <Th>Student No</Th>
               <Th>Full Name</Th>
