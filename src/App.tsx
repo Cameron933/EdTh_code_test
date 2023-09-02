@@ -3,9 +3,9 @@ import StudentTable from "./components/StudentTable";
 
 const App: React.FC = () => {
   return (
-    <div style={{ backgroundColor: "#2546ce", height: "100vh" }}>
-      <div style={{ backgroundColor: "#17e07d", color: "white" }}>
-        <div
+    <main style={{ backgroundColor: "#2546ce", height: "100vh" }}>
+      <header style={{ backgroundColor: "#17e07d", color: "white" }}>
+        <h1
           style={{
             display: "flex",
             alignItems: "center",
@@ -15,9 +15,9 @@ const App: React.FC = () => {
           }}
         >
           Welcome to the Education Horizons{" "}
-        </div>
-      </div>
-      <div
+        </h1>
+      </header>
+      <section
         style={{
           display: "flex",
           alignItems: "center",
@@ -27,8 +27,8 @@ const App: React.FC = () => {
         }}
       >
         <StudentTable />
-      </div>
-    </div>
+      </section>
+    </main>
   );
 };
 
