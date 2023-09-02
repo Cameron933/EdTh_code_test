@@ -1,34 +1,19 @@
 import React from "react";
 import StudentTable from "./components/StudentTable";
+import { Box, Flex } from "@chakra-ui/react";
 
 const App: React.FC = () => {
   return (
-    <main style={{ backgroundColor: "#2546ce", height: "100vh" }}>
-      <header style={{ backgroundColor: "#17e07d", color: "white" }}>
-        <h1
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            height: "20%",
-            fontSize: 30,
-          }}
-        >
-          Welcome to the Education Horizons{" "}
-        </h1>
-      </header>
-      <section
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          height: "40%",
-          fontSize: 20,
-        }}
-      >
+    <Box bg="#2546ce" h="100vh">
+      <Box bg="#17e07d" color="white">
+        <Flex alignItems="center" justifyContent="center" h="20%" fontSize="3xl">
+          Welcome to the Education Horizons
+        </Flex>
+      </Box>
+      <Flex alignItems="center" justifyContent="center" h="40%" fontSize="lg">
         <StudentTable />
-      </section>
-    </main>
+      </Flex>
+    </Box>
   );
 };
 
