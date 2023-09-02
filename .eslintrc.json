@@ -1,4 +1,7 @@
 {
-  "extends": ["react-app", "react-app/jest", "plugins:jest/recommended"],
-  "plugins": ["jest"]
+  "extends": ["plugin:react/recommended", "plugin:jest/recommended"],
+  "plugins": ["react", "jest"],
+  "rules": {
+    "jest/no-commented-out-tests": "off"
+  }
 }

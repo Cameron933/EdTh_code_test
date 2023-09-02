@@ -8,6 +8,7 @@ import {
   ModalBody,
   ModalCloseButton,
   Button,
+  Stack,
 } from "@chakra-ui/react";
 import useStudentDetailsModal from "../services/useStudentDetailsModal";
 import LoadingModal from "./LoadingModal";
@@ -78,8 +79,12 @@ const StudentDetailsModal = ({ student, isOpen, onClose, onSaveEdit }: StudentTa
             ) : null}
           </ModalBody>
           <ModalFooter>
-            <Button onClick={handleSaveClick}>Save</Button>
-            <Button onClick={onClose}>Close</Button>
+            <Stack spacing={4} direction="row" align="center">
+              <Button onClick={handleSaveClick} colorScheme="teal">
+                Save
+              </Button>
+              <Button onClick={onClose}>Close</Button>
+            </Stack>
           </ModalFooter>
         </ModalContent>
       </Modal>

@@ -4,24 +4,13 @@ import "@testing-library/jest-dom";
 import App from "../src/App";
 
 describe("App", () => {
-  beforeEach(() => {
-    render(<App />);
-  });
-
   it("should renders page title message", () => {
+    render(<App />);
     const title = screen.getByText("Welcome to the Education Horizons");
     expect(title).toBeInTheDocument();
   });
 
-  //   it("should renders StudentTable component with mockData in success", () => {
-
-  //   });
-
-  //   it("should open StudentDetailsModal with mockData in success", () => {
-
-  //   });
-
-  //   it("should update Student first & last name in success", () => {
-
-  //   });
+  // it("should renders StudentTable component with mockData in success", () => {});
+  // it("should open StudentDetailsModal with mockData in success", () => {});
+  // it("should update Student first & last name in success", () => {});
 });
