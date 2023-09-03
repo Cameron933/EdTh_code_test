@@ -91,10 +91,12 @@ const StudentDetailsModal = ({ student, isOpen, onClose, onSaveEdit }: StudentTa
           </ModalBody>
           <ModalFooter>
             <Stack spacing={4} direction="row" align="center">
-              <Button onClick={handleSaveClick} colorScheme="teal">
+              <Button onClick={handleSaveClick} colorScheme="teal" aria-label="saveBtn">
                 Save
               </Button>
-              <Button onClick={onClose}>Close</Button>
+              <Button onClick={onClose} aria-label="closeBtn">
+                Close
+              </Button>
             </Stack>
           </ModalFooter>
         </ModalContent>
