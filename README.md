@@ -3,30 +3,32 @@
 This application allows school teachers to view and update student details.
 
 ## File structure
+
 frontend/
+|-- .git/
 |-- .vscode/
 |-- build/
 |-- coverage/
 |-- node_modules/
 |-- public/
-|   |-- index.html
+| |-- index.html
 |-- src/
-|   |-- components/
-|   |   |-- LoadingModal.tsx
-|   |   |-- StudentDetailsModal.tsx
-|   |   |-- StudentTable.tsx
-|   |   |-- StudentTableRow.tsx
-|   |-- interfaces/
-|   |   |-- student.d.ts
-|   |-- services/
-|   |   |-- useStudentDetailsModal.ts
-|   |   |-- useStudentTable.ts
-|   |-- utils/
-|   |   |-- axiosErrorHelper.ts
-|   |   |-- dateTimeFomatter.ts
-|   |-- App.tsx
-|   |-- index.tsx
-|   |-- setupTests.ts
+| |-- components/
+| | |-- LoadingModal.tsx
+| | |-- StudentDetailsModal.tsx
+| | |-- StudentTable.tsx
+| | |-- StudentTableRow.tsx
+| |-- interfaces/
+| | |-- student.d.ts
+| |-- services/
+| | |-- useStudentDetailsModal.ts
+| | |-- useStudentTable.ts
+| |-- utils/
+| | |-- axiosErrorHelper.ts
+| | |-- dateTimeFomatter.ts
+| |-- App.tsx
+| |-- index.tsx
+| |-- setupTests.ts
 |-- .eslintrc.json
 |-- .prettierignore
 |-- .gitignore
