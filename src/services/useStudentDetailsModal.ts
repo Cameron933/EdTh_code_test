@@ -20,7 +20,7 @@ const useStudentDetailsModal = (
 
     setIsLoading(true);
     try {
-      const response = await axios.get(`http://localhost:5000/profiles/${studentId}`);
+      const response = await axios.get(`${process.env.REACT_APP_PROFILE_DATA}${studentId}`);
       if (response && response.data) {
         setStudentProfile(response.data);
       }

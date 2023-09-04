@@ -18,7 +18,7 @@ const useStudentTable = (): UseStudentTableReturnType => {
   const fetchStudentsInfo = useCallback(async () => {
     setIsLoading(true);
     try {
-      const response = await axios.get("http://localhost:5000/students");
+      const response = await axios.get(`${process.env.REACT_APP_STUDENT_TABLE_DATA}`);
       const dobFormattedStudentsInfo = response.data.map((student: StudentInfo) => ({
         ...student,
         date_of_birth: dateFormatter(student.date_of_birth),
@@ -36,7 +36,7 @@ const useStudentTable = (): UseStudentTableReturnType => {
   const updateStudentInfo = async (editedStudentInfo: StudentInfo) => {
     try {
       setIsLoading(true);
-      await axios.patch(`http://localhost:5000/students/${editedStudentInfo.id}`, {
+      await axios.patch(`${process.env.REACT_APP_UPDATE_TABLE_DATA}${editedStudentInfo.id}`, {
         first_name: editedStudentInfo.first_name,
         last_name: editedStudentInfo.last_name,
       });

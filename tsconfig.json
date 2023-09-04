@@ -14,7 +14,7 @@
     "isolatedModules": true,
     "incremental": true,
     "jsx": "react",
-    "types": ["jest"]
+    "types": ["jest", "node"]
   },
   "include": ["src/**/*", "src/jest.setup.js"],
   "exclude": ["node_modules"]

@@ -17,14 +17,19 @@ import {
 import useStudentDetailsModal from "../services/useStudentDetailsModal";
 import LoadingModal from "./LoadingModal";
 
-type StudentTableProps = {
+type StudentDetailsModalProps = {
   student?: StudentInfo;
   isOpen: boolean;
   onClose: () => void;
   onSaveEdit: (editedStudentInfo: StudentInfo) => void;
 };
 
-const StudentDetailsModal = ({ student, isOpen, onClose, onSaveEdit }: StudentTableProps) => {
+const StudentDetailsModal = ({
+  student,
+  isOpen,
+  onClose,
+  onSaveEdit,
+}: StudentDetailsModalProps) => {
   const [studentFirstName, setStudentFirstName] = useState<string>(student?.first_name || "");
   const [studentLastName, setStudentLastName] = useState<string>(student?.last_name || "");
   const { isLoading, studentProfile } = useStudentDetailsModal(student?.id);
@@ -51,7 +56,7 @@ const StudentDetailsModal = ({ student, isOpen, onClose, onSaveEdit }: StudentTa
   return isLoading ? (
     <LoadingModal isLoading={isLoading} />
   ) : student ? (
-    <>
+    <React.Fragment>
       <Modal onClose={onClose} isOpen={isOpen} isCentered scrollBehavior={"inside"}>
         <ModalOverlay />
         <ModalContent>
@@ -101,7 +106,7 @@ const StudentDetailsModal = ({ student, isOpen, onClose, onSaveEdit }: StudentTa
           </ModalFooter>
         </ModalContent>
       </Modal>
-    </>
+    </React.Fragment>
   ) : null;
 };
 
