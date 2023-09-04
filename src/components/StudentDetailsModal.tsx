@@ -67,7 +67,7 @@ const StudentDetailsModal = ({
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            {student && studentProfile ? (
+            {studentProfile ? (
               <Flex direction="column" alignItems="start">
                 <Flex justifyContent="center" alignItems="center" mb={4}>
                   <Image
