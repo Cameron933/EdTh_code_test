@@ -13,6 +13,8 @@ import {
   Image,
   Text,
   Input,
+  VStack,
+  StackDivider,
 } from "@chakra-ui/react";
 import useStudentDetailsModal from "../services/useStudentDetailsModal";
 import LoadingModal from "./LoadingModal";
@@ -68,8 +70,8 @@ const StudentDetailsModal = ({
           <ModalCloseButton />
           <ModalBody>
             {studentProfile ? (
-              <Flex direction="column" alignItems="start">
-                <Flex justifyContent="center" alignItems="center" mb={4}>
+              <VStack spacing="0.5rem" w="100%">
+                <Flex>
                   <Image
                     boxSize="150px"
                     src={studentProfile.image_url}
@@ -85,15 +87,20 @@ const StudentDetailsModal = ({
                   value={studentLastName}
                   onChange={(e) => setStudentLastName(e.target.value)}
                   placeholder="Last Name"
-                  my="2"
                 />
-
-                <Text>Date of Birth: {student.date_of_birth}</Text>
-                <Text>Street line 1: {student.address.street_line1}</Text>
-                <Text>Street line 2: {student.address.street_line2}</Text>
-                <Text>Country: {student.address.country}</Text>
-                <Text>Postcode: {student.address.postcode}</Text>
-              </Flex>
+                <VStack
+                  divider={<StackDivider borderColor="gray.200" />}
+                  spacing="0.5rem"
+                  align="stretch"
+                  w="100%"
+                >
+                  <Text>Date of Birth: {student.date_of_birth}</Text>
+                  <Text>Street line 1: {student.address.street_line1}</Text>
+                  <Text>Street line 2: {student.address.street_line2}</Text>
+                  <Text>Country: {student.address.country}</Text>
+                  <Text>Postcode: {student.address.postcode}</Text>
+                </VStack>
+              </VStack>
             ) : null}
           </ModalBody>
           <ModalFooter>
