@@ -12,12 +12,12 @@ import {
   Flex,
   Image,
   Text,
-  Input,
   VStack,
   StackDivider,
 } from "@chakra-ui/react";
 import useStudentDetailsModal from "../services/useStudentDetailsModal";
 import LoadingModal from "./LoadingModal";
+import { FormGroupInput } from "./Input/FormGroupInput";
 
 type StudentDetailsModalProps = {
   student?: StudentInfo;
@@ -34,9 +34,17 @@ const StudentDetailsModal = ({
 }: StudentDetailsModalProps) => {
   const [studentFirstName, setStudentFirstName] = useState<string>(student?.first_name || "");
   const [studentLastName, setStudentLastName] = useState<string>(student?.last_name || "");
+  const [isInvalid, setIsInvalid] = useState<boolean>(false);
   const { isLoading, studentProfile } = useStudentDetailsModal(student?.id);
 
   const handleSaveClick = () => {
+    if (studentFirstName.trim() === "" || studentLastName.trim() === "") {
+      setIsInvalid(true);
+      return;
+    }
+
+    setIsInvalid(false);
+
     if (student) {
       const editedStudentInfo: StudentInfo = {
         ...student,
@@ -78,16 +86,28 @@ const StudentDetailsModal = ({
                     alt={`student pic of ${student.first_name} ${student.last_name}`}
                   />
                 </Flex>
-                <Input
-                  value={studentFirstName}
-                  onChange={(e) => setStudentFirstName(e.target.value)}
+
+                <FormGroupInput
+                  id="first_name"
+                  label="First name"
                   placeholder="First Name"
+                  value={studentFirstName}
+                  onChange={(e) => {
+                    setStudentFirstName(e.target.value);
+                  }}
+                  isInvalid={isInvalid}
                 />
-                <Input
-                  value={studentLastName}
-                  onChange={(e) => setStudentLastName(e.target.value)}
+                <FormGroupInput
+                  id="last_name"
+                  label="Last name"
                   placeholder="Last Name"
+                  value={studentLastName}
+                  onChange={(e) => {
+                    setStudentLastName(e.target.value);
+                  }}
+                  isInvalid={isInvalid}
                 />
+
                 <VStack
                   divider={<StackDivider borderColor="gray.200" />}
                   spacing="0.5rem"
