@@ -53,9 +53,11 @@ const StudentDetailsModal = ({
     }
   }, [isOpen, student]);
 
-  return isLoading ? (
-    <LoadingModal isLoading={isLoading} />
-  ) : student ? (
+  if (isLoading) return <LoadingModal isLoading={isLoading} />;
+
+  if (!student) return <React.Fragment></React.Fragment>;
+
+  return (
     <React.Fragment>
       <Modal onClose={onClose} isOpen={isOpen} isCentered scrollBehavior={"inside"}>
         <ModalOverlay />
@@ -107,7 +109,7 @@ const StudentDetailsModal = ({
         </ModalContent>
       </Modal>
     </React.Fragment>
-  ) : null;
+  );
 };
 
 export default StudentDetailsModal;
