@@ -8,12 +8,12 @@ import {
   TableCaption,
   TableContainer,
   useDisclosure,
-  Spinner,
   VStack,
 } from "@chakra-ui/react";
 import StudentDetailsModal from "./StudentDetailsModal";
 import StudentTableRow from "./StudentTableRow";
 import useStudentTable from "../services/useStudentTable";
+import LoadingTable from "./LoadingTable";
 
 const StudentTable = () => {
   const [selectedStudent, setSelectedStudent] = useState<StudentInfo>();
@@ -30,9 +30,7 @@ const StudentTable = () => {
     onOpen();
   };
 
-  return isLoading ? (
-    <Spinner thickness="4px" speed="0.65s" emptyColor="gray.200" color="blue.500" size="xl" />
-  ) : (
+  return (
     <TableContainer>
       <VStack>
         <Table variant="simple" color="white">
@@ -47,13 +45,17 @@ const StudentTable = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {studentInfo.map((student) => (
-              <StudentTableRow
-                key={student.id}
-                student={student}
-                onRowClick={() => handleRowClick(student)}
-              />
-            ))}
+            {isLoading ? (
+              <LoadingTable />
+            ) : (
+              studentInfo.map((student) => (
+                <StudentTableRow
+                  key={student.id}
+                  student={student}
+                  onRowClick={() => handleRowClick(student)}
+                />
+              ))
+            )}
           </Tbody>
         </Table>
 
