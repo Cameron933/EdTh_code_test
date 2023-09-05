@@ -17,6 +17,7 @@ import {
   Text,
   VStack,
   StackDivider,
+  FormControl,
 } from "@chakra-ui/react";
 import useStudentDetailsModal from "../services/useStudentDetailsModal";
 import LoadingModal from "./LoadingModal";
@@ -38,6 +39,7 @@ const StudentDetailsModal = ({
   onClose,
   onSaveEdit,
 }: StudentDetailsModalProps) => {
+  const { firstName, lastName } = formConfig;
   const [studentFirstName, setStudentFirstName] = useState<string>(student?.first_name || "");
   const [studentLastName, setStudentLastName] = useState<string>(student?.last_name || "");
   const { isLoading, studentProfile } = useStudentDetailsModal(student?.id);
@@ -93,25 +95,24 @@ const StudentDetailsModal = ({
                     alt={`student pic of ${student.first_name} ${student.last_name}`}
                   />
                 </Flex>
-
-                <FormGroupInput
-                  id="first_name"
-                  label="First name"
-                  placeholder="First Name"
-                  value={studentFirstName}
-                  onChange={(e) => {
-                    setStudentFirstName(e.target.value);
-                  }}
-                />
-                <FormGroupInput
-                  id="last_name"
-                  label="Last name"
-                  placeholder="Last Name"
-                  value={studentLastName}
-                  onChange={(e) => {
-                    setStudentLastName(e.target.value);
-                  }}
-                />
+                <FormControl as="form" onSubmit={handleSaveClick}>
+                  <FormGroupInput
+                    {...firstName}
+                    {...register("firstName")}
+                    errorMessage={formState.errors.firstName?.message}
+                    onChange={(e) => {
+                      setStudentFirstName(e.target.value);
+                    }}
+                  />
+                  <FormGroupInput
+                    {...lastName}
+                    {...register("lastName")}
+                    errorMessage={formState.errors.lastName?.message}
+                    onChange={(e) => {
+                      setStudentLastName(e.target.value);
+                    }}
+                  />
+                </FormControl>
 
                 <VStack
                   divider={<StackDivider borderColor="gray.200" />}
