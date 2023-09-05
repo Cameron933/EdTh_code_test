@@ -20,3 +20,8 @@ interface StudentProfile {
   student_id: number;
   image_url: string;
 }
+
+interface StudentInfoFormData {
+  firstName: string;
+  lastName: string;
+}

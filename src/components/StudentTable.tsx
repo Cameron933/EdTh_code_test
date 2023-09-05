@@ -16,9 +16,12 @@ import StudentTableRow from "./StudentTableRow";
 import useStudentTable from "../services/useStudentTable";
 
 const StudentTable = () => {
-  const { studentInfo, isLoading, updateStudentInfo } = useStudentTable();
-
   const [selectedStudent, setSelectedStudent] = useState<StudentInfo>();
+  const [data, setData] = useState<StudentInfoFormData>({
+    firstName: "",
+    lastName: "",
+  });
+  const { studentInfo, isLoading, updateStudentInfo } = useStudentTable();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -60,6 +63,8 @@ const StudentTable = () => {
             isOpen={isOpen}
             onClose={onClose}
             onSaveEdit={updateStudentInfo}
+            data={data}
+            setData={setData}
           />
         )}
       </VStack>

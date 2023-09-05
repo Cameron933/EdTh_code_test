@@ -4,10 +4,11 @@ import {
   FormLabel,
   Input as CKInput,
   InputProps as CKInputProps,
-  InputGroup,
-  InputRightElement,
-  Icon,
+  FormHelperText,
   FormErrorMessage,
+  InputGroup,
+  Icon,
+  InputRightElement,
 } from "@chakra-ui/react";
 import { FaEdit } from "react-icons/fa";
 
@@ -15,16 +16,18 @@ type GroupInputProps = {
   label: string;
   id: string;
   placeholder: string;
-  isInvalid: boolean;
+  addon?: string;
   role?: string;
   type?: string;
+  helperText?: string;
+  errorMessage?: string;
 } & CKInputProps;
 export const FormGroupInput = React.forwardRef(function FormGroupInput(
-  { id, label, isInvalid, ...inputProps }: GroupInputProps,
+  { id, isRequired, label, helperText, errorMessage, ...inputProps }: GroupInputProps,
   ref: React.ForwardedRef<HTMLInputElement>
 ) {
   return (
-    <FormControl variant="floating" id={id} isInvalid={isInvalid}>
+    <FormControl variant="floating" id={id} isInvalid={errorMessage !== undefined}>
       <InputGroup my="1rem">
         <CKInput {...inputProps} ref={ref} />
         <FormLabel htmlFor={label}>{label}</FormLabel>
@@ -32,7 +35,8 @@ export const FormGroupInput = React.forwardRef(function FormGroupInput(
           <Icon as={FaEdit} color="blue.400" />
         </InputRightElement>
       </InputGroup>
-      <FormErrorMessage>{`${label} cannot be empty`}</FormErrorMessage>
+      <FormHelperText>{helperText}</FormHelperText>
+      <FormErrorMessage role="error">{errorMessage}</FormErrorMessage>
     </FormControl>
   );
 });

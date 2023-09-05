@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { formConfig } from "./formConfig";
-
+import { yupResolver } from "@hookform/resolvers/yup";
 import {
   Modal,
   ModalOverlay,
@@ -21,12 +21,15 @@ import {
 import useStudentDetailsModal from "../services/useStudentDetailsModal";
 import LoadingModal from "./LoadingModal";
 import { FormGroupInput } from "./Input/FormGroupInput";
+import { StudentInfoFormSchema } from "./StudentInfoForm.schema";
 
 type StudentDetailsModalProps = {
   student?: StudentInfo;
   isOpen: boolean;
   onClose: () => void;
   onSaveEdit: (editedStudentInfo: StudentInfo) => void;
+  data: StudentInfoFormData;
+  setData: Dispatch<SetStateAction<StudentInfoFormData>>;
 };
 
 const StudentDetailsModal = ({
@@ -37,17 +40,18 @@ const StudentDetailsModal = ({
 }: StudentDetailsModalProps) => {
   const [studentFirstName, setStudentFirstName] = useState<string>(student?.first_name || "");
   const [studentLastName, setStudentLastName] = useState<string>(student?.last_name || "");
-  const [isInvalid, setIsInvalid] = useState<boolean>(false);
   const { isLoading, studentProfile } = useStudentDetailsModal(student?.id);
+  const { register, formState, handleSubmit } = useForm<StudentInfoFormData>({
+    defaultValues: {
+      firstName: studentFirstName,
+      lastName: studentLastName,
+    },
+    mode: "all",
+    reValidateMode: "onChange",
+    resolver: yupResolver(StudentInfoFormSchema),
+  });
 
   const handleSaveClick = () => {
-    if (studentFirstName.trim() === "" || studentLastName.trim() === "") {
-      setIsInvalid(true);
-      return;
-    }
-
-    setIsInvalid(false);
-
     if (student) {
       const editedStudentInfo: StudentInfo = {
         ...student,
@@ -98,7 +102,6 @@ const StudentDetailsModal = ({
                   onChange={(e) => {
                     setStudentFirstName(e.target.value);
                   }}
-                  isInvalid={isInvalid}
                 />
                 <FormGroupInput
                   id="last_name"
@@ -108,7 +111,6 @@ const StudentDetailsModal = ({
                   onChange={(e) => {
                     setStudentLastName(e.target.value);
                   }}
-                  isInvalid={isInvalid}
                 />
 
                 <VStack
