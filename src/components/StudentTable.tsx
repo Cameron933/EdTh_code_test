@@ -34,7 +34,7 @@ const StudentTable = () => {
     <TableContainer>
       <VStack>
         <Table variant="simple" color="white">
-          <TableCaption textColor="gray.900">
+          <TableCaption textColor="whiteAlpha.900">
             View and update student details by clicking the row
           </TableCaption>
           <Thead bg="white">
