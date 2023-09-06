@@ -21,7 +21,7 @@ const StudentTable = () => {
     firstName: "",
     lastName: "",
   });
-  const { studentInfo, isLoading, updateStudentInfo } = useStudentTable();
+  const { studentInfo, isLoading } = useStudentTable();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -64,7 +64,6 @@ const StudentTable = () => {
             student={selectedStudent}
             isOpen={isOpen}
             onClose={onClose}
-            onSaveEdit={updateStudentInfo}
             data={data}
             setData={setData}
           />

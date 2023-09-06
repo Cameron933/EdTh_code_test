@@ -28,21 +28,17 @@ type StudentDetailsModalProps = {
   student?: StudentInfo;
   isOpen: boolean;
   onClose: () => void;
-  onSaveEdit: (editedStudentInfo: StudentInfo) => void;
   data: StudentInfoFormData;
   setData: Dispatch<SetStateAction<StudentInfoFormData>>;
 };
 
-const StudentDetailsModal = ({
-  student,
-  isOpen,
-  onClose,
-  onSaveEdit,
-}: StudentDetailsModalProps) => {
+const StudentDetailsModal = ({ student, isOpen, onClose }: StudentDetailsModalProps) => {
   const { firstName, lastName } = formConfig;
   const [studentFirstName, setStudentFirstName] = useState<string>(student?.first_name || "");
   const [studentLastName, setStudentLastName] = useState<string>(student?.last_name || "");
-  const { isLoading, studentProfile } = useStudentDetailsModal(student?.id);
+  const { isLoading, isUpdating, studentProfile, updateStudentInfo } = useStudentDetailsModal(
+    student?.id
+  );
   const { register, formState, handleSubmit } = useForm<StudentInfoFormData>({
     defaultValues: {
       firstName: studentFirstName,
@@ -53,17 +49,17 @@ const StudentDetailsModal = ({
     resolver: yupResolver(StudentInfoFormSchema),
   });
 
-  const handleSaveClick = () => {
+  const onSubmit = handleSubmit(() => {
     if (student) {
       const editedStudentInfo: StudentInfo = {
         ...student,
         first_name: studentFirstName,
         last_name: studentLastName,
       };
-      onSaveEdit(editedStudentInfo);
+      updateStudentInfo(editedStudentInfo);
       onClose();
     }
-  };
+  });
 
   useEffect(() => {
     if (isOpen && student) {
@@ -85,17 +81,17 @@ const StudentDetailsModal = ({
             {student ? `${student.first_name} ${student.last_name}'s profile` : ""}
           </ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
-            {studentProfile ? (
-              <VStack spacing="0.5rem" w="100%">
-                <Flex>
-                  <Image
-                    boxSize="150px"
-                    src={studentProfile.image_url}
-                    alt={`student pic of ${student.first_name} ${student.last_name}`}
-                  />
-                </Flex>
-                <FormControl as="form" onSubmit={handleSaveClick}>
+          <FormControl as="form" onSubmit={onSubmit}>
+            <ModalBody>
+              {studentProfile ? (
+                <VStack spacing="0.5rem" w="100%">
+                  <Flex>
+                    <Image
+                      boxSize="150px"
+                      src={studentProfile.image_url}
+                      alt={`student pic of ${student.first_name} ${student.last_name}`}
+                    />
+                  </Flex>
                   <FormGroupInput
                     {...firstName}
                     {...register("firstName")}
@@ -112,33 +108,39 @@ const StudentDetailsModal = ({
                       setStudentLastName(e.target.value);
                     }}
                   />
-                </FormControl>
 
-                <VStack
-                  divider={<StackDivider borderColor="gray.200" />}
-                  spacing="0.5rem"
-                  align="stretch"
-                  w="100%"
-                >
-                  <Text>Date of Birth: {student.date_of_birth}</Text>
-                  <Text>Street line 1: {student.address.street_line1}</Text>
-                  <Text>Street line 2: {student.address.street_line2}</Text>
-                  <Text>Country: {student.address.country}</Text>
-                  <Text>Postcode: {student.address.postcode}</Text>
+                  <VStack
+                    divider={<StackDivider borderColor="gray.200" />}
+                    spacing="0.5rem"
+                    align="stretch"
+                    w="100%"
+                  >
+                    <Text>Date of Birth: {student.date_of_birth}</Text>
+                    <Text>Street line 1: {student.address.street_line1}</Text>
+                    <Text>Street line 2: {student.address.street_line2}</Text>
+                    <Text>Country: {student.address.country}</Text>
+                    <Text>Postcode: {student.address.postcode}</Text>
+                  </VStack>
                 </VStack>
-              </VStack>
-            ) : null}
-          </ModalBody>
-          <ModalFooter>
-            <Stack spacing={4} direction="row" align="center">
-              <Button onClick={handleSaveClick} colorScheme="teal" aria-label="saveBtn">
-                Save
-              </Button>
-              <Button onClick={onClose} aria-label="closeBtn">
-                Close
-              </Button>
-            </Stack>
-          </ModalFooter>
+              ) : null}
+            </ModalBody>
+            <ModalFooter>
+              <Stack spacing={4} direction="row" align="center">
+                <Button
+                  type="submit"
+                  isLoading={isUpdating}
+                  disabled={!formState.isValid}
+                  colorScheme="teal"
+                  aria-label="saveBtn"
+                >
+                  Save
+                </Button>
+                <Button onClick={onClose} aria-label="closeBtn">
+                  Close
+                </Button>
+              </Stack>
+            </ModalFooter>
+          </FormControl>
         </ModalContent>
       </Modal>
     </React.Fragment>

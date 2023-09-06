@@ -7,7 +7,7 @@ import axiosErrorHelper from "../utils/axiosErrorHelper";
 type UseStudentTableReturnType = {
   studentInfo: StudentInfo[];
   isLoading: boolean;
-  updateStudentInfo: (editedStudentInfo: StudentInfo) => Promise<void>;
+  fetchStudentsInfo: () => Promise<void>;
 };
 
 const useStudentTable = (): UseStudentTableReturnType => {
@@ -33,38 +33,11 @@ const useStudentTable = (): UseStudentTableReturnType => {
     }
   }, [toast]);
 
-  const updateStudentInfo = async (editedStudentInfo: StudentInfo) => {
-    try {
-      setIsLoading(true);
-      await axios.patch(`${process.env.REACT_APP_UPDATE_TABLE_DATA}${editedStudentInfo.id}`, {
-        first_name: editedStudentInfo.first_name,
-        last_name: editedStudentInfo.last_name,
-      });
-
-      toast({
-        title: "Update completed",
-        description: "Now we will try to update all information from server again",
-        status: "info",
-        duration: 6000,
-        position: "bottom",
-        isClosable: true,
-      });
-
-      fetchStudentsInfo();
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        axiosErrorHelper(error, toast);
-      }
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
     fetchStudentsInfo();
   }, [fetchStudentsInfo]);
 
-  return { studentInfo, isLoading, updateStudentInfo };
+  return { studentInfo, isLoading, fetchStudentsInfo };
 };
 
 export default useStudentTable;
