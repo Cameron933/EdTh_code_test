@@ -29,9 +29,10 @@ type StudentDetailsModalProps = {
   student?: StudentInfo;
   isOpen: boolean;
   onClose: () => void;
+  onUpdated: () => void;
 };
 
-const StudentDetailsModal = ({ student, isOpen, onClose }: StudentDetailsModalProps) => {
+const StudentDetailsModal = ({ student, isOpen, onClose, onUpdated }: StudentDetailsModalProps) => {
   const { firstName, lastName } = formConfig;
   const { isLoading, isUpdating, studentProfile, updateStudentPayload } = useStudentDetailsModal(
     student?.id
@@ -56,7 +57,9 @@ const StudentDetailsModal = ({ student, isOpen, onClose }: StudentDetailsModalPr
         first_name: formData.firstName,
         last_name: formData.lastName,
       };
-      updateStudentPayload(editedStudentInfo);
+      updateStudentPayload(editedStudentInfo).then(() => {
+        if (onUpdated) onUpdated();
+      });
     }
   });
 
