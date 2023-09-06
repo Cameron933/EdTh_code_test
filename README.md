@@ -93,8 +93,8 @@ npm run start
 | Framework          | `react`                         |
 | BootStrapper       | `create-react-app`              |
 | Scripting Language | `typescript`                    |
-| Styling            | chakra-ui                       |
-| State-Management   | (TBD)                           |
+| Styling            | `chakra-ui`                     |
+| State-Management   | `zustand`                       |
 | Testing            | `jest`, `react-testing-library` |
 | Localisation       | (TBD)                           |
 | Code Control       | `eslint`, `prettier`            |
