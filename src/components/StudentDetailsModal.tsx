@@ -34,39 +34,37 @@ type StudentDetailsModalProps = {
 
 const StudentDetailsModal = ({ student, isOpen, onClose }: StudentDetailsModalProps) => {
   const { firstName, lastName } = formConfig;
-  const [studentFirstName, setStudentFirstName] = useState<string>(student?.first_name || "");
-  const [studentLastName, setStudentLastName] = useState<string>(student?.last_name || "");
   const { isLoading, isUpdating, studentProfile, updateStudentInfo } = useStudentDetailsModal(
     student?.id
   );
-  const { register, formState, handleSubmit } = useForm<StudentInfoFormData>({
+  const { register, formState, handleSubmit, reset } = useForm<StudentInfoFormData>({
     defaultValues: {
-      firstName: studentFirstName,
-      lastName: studentLastName,
+      firstName: "",
+      lastName: "",
     },
     mode: "all",
     reValidateMode: "onChange",
     resolver: yupResolver(StudentInfoFormSchema),
   });
 
-  const onSubmit = handleSubmit(() => {
+  const onSubmit = handleSubmit((formData) => {
     if (student) {
       const editedStudentInfo: StudentInfo = {
         ...student,
-        first_name: studentFirstName,
-        last_name: studentLastName,
+        ...formData,
       };
       updateStudentInfo(editedStudentInfo);
-      onClose();
     }
   });
 
   useEffect(() => {
-    if (isOpen && student) {
-      setStudentFirstName(student.first_name);
-      setStudentLastName(student.last_name);
+    if (isOpen) {
+      reset({
+        firstName: student?.first_name,
+        lastName: student?.last_name,
+      });
     }
-  }, [isOpen, student]);
+  }, [isOpen, student, reset]);
 
   if (isLoading) return <LoadingModal isLoading={isLoading} />;
 
