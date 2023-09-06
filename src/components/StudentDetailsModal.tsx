@@ -32,10 +32,6 @@ type StudentDetailsModalProps = {
 
 const StudentDetailsModal = ({ student, isOpen, onClose }: StudentDetailsModalProps) => {
   const { firstName, lastName } = formConfig;
-  const [data, setData] = useState<StudentInfoFormData>({
-    firstName: "",
-    lastName: "",
-  });
   const { isLoading, isUpdating, studentProfile, updateStudentInfo } = useStudentDetailsModal(
     student?.id
   );
@@ -49,8 +45,8 @@ const StudentDetailsModal = ({ student, isOpen, onClose }: StudentDetailsModalPr
     resolver: yupResolver(StudentInfoFormSchema),
   });
 
-  const watchedValues = watch();
-  console.log(watchedValues);
+  // const watchedValues = watch();
+  // console.log(watchedValues);
 
   const onSubmit = handleSubmit((formData) => {
     if (student) {
