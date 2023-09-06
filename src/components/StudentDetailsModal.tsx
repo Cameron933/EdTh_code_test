@@ -56,7 +56,8 @@ const StudentDetailsModal = ({ student, isOpen, onClose }: StudentDetailsModalPr
     if (student) {
       const editedStudentInfo: StudentInfo = {
         ...student,
-        ...formData,
+        first_name: formData.firstName,
+        last_name: formData.lastName,
       };
       updateStudentInfo(editedStudentInfo);
     }
