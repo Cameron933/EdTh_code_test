@@ -18,6 +18,7 @@ import {
   VStack,
   StackDivider,
   FormControl,
+  Input,
 } from "@chakra-ui/react";
 import useStudentDetailsModal from "../services/useStudentDetailsModal";
 import LoadingModal from "./LoadingModal";
@@ -90,11 +91,12 @@ const StudentDetailsModal = ({ student, isOpen, onClose }: StudentDetailsModalPr
                       alt={`student pic of ${student.first_name} ${student.last_name}`}
                     />
                   </Flex>
-                  <FormGroupInput
+                  <Input {...register("firstName")} defaultValue={student?.first_name} />
+                  {/* <FormGroupInput
                     {...firstName}
                     {...register("firstName")}
                     errorMessage={formState.errors.firstName?.message}
-                  />
+                  /> */}
                   <FormGroupInput
                     {...lastName}
                     {...register("lastName")}
