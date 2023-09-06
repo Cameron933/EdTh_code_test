@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   Thead,
@@ -18,6 +18,7 @@ import LoadingTable from "./LoadingTable";
 const StudentTable = () => {
   const [selectedStudent, setSelectedStudent] = useState<StudentInfo>();
   const [refreshKey, setRefreshKey] = useState<number>(0);
+  const [studentArray, setStudentArray] = useState<StudentInfo[]>();
   const { studentInfo, isLoading } = useStudentTable();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -31,6 +32,13 @@ const StudentTable = () => {
     setRefreshKey((prevKey) => prevKey + 1);
   };
 
+  useEffect(() => {
+    console.log("update");
+    if (studentInfo) {
+      setStudentArray(studentInfo);
+    }
+  }, [studentInfo]);
+  if (!studentArray) return <React.Fragment></React.Fragment>;
   return (
     <TableContainer>
       <VStack>
@@ -49,7 +57,7 @@ const StudentTable = () => {
             {isLoading ? (
               <LoadingTable />
             ) : (
-              studentInfo.map((student) => (
+              studentArray.map((student) => (
                 <StudentTableRow
                   key={student.id}
                   student={student}

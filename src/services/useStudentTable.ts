@@ -15,7 +15,7 @@ const useStudentTable = (): UseStudentTableReturnType => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const toast = useToast();
 
-  const fetchStudentsInfo = useCallback(async () => {
+  const fetchStudentsInfo = async () => {
     setIsLoading(true);
     try {
       const response = await axios.get(`${process.env.REACT_APP_STUDENT_TABLE_DATA}`);
@@ -23,6 +23,7 @@ const useStudentTable = (): UseStudentTableReturnType => {
         ...student,
         date_of_birth: dateFormatter(student.date_of_birth),
       }));
+      console.log("fetching");
       setStudentInfo(dobFormattedStudentsInfo);
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -31,11 +32,11 @@ const useStudentTable = (): UseStudentTableReturnType => {
     } finally {
       setIsLoading(false);
     }
-  }, [toast]);
+  };
 
   useEffect(() => {
     fetchStudentsInfo();
-  }, [fetchStudentsInfo]);
+  }, []);
 
   return { studentInfo, isLoading, fetchStudentsInfo };
 };

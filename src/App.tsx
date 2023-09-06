@@ -1,6 +1,6 @@
 import React from "react";
 import StudentTable from "./components/StudentTable";
-import { Box, Flex, VStack } from "@chakra-ui/react";
+import { Flex, VStack } from "@chakra-ui/react";
 
 const App: React.FC = () => {
   return (
