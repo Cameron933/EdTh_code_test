@@ -23,6 +23,7 @@ import useStudentDetailsModal from "../services/useStudentDetailsModal";
 import LoadingModal from "./LoadingModal";
 import { FormGroupInput } from "./Input/FormGroupInput";
 import { StudentInfoFormSchema } from "./StudentInfoForm.schema";
+import { BeatLoader } from "react-spinners";
 
 type StudentDetailsModalProps = {
   student?: StudentInfo;
@@ -123,6 +124,8 @@ const StudentDetailsModal = ({ student, isOpen, onClose }: StudentDetailsModalPr
                 <Button
                   type="submit"
                   isLoading={isUpdating}
+                  spinner={<BeatLoader size={8} color="white" />}
+                  loadingText="Saving"
                   disabled={!formState.isValid}
                   colorScheme="teal"
                   aria-label="saveBtn"
