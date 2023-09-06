@@ -30,7 +30,7 @@ export const FormGroupInput = React.forwardRef(function FormGroupInput(
     <FormControl variant="floating" id={id} isInvalid={errorMessage !== undefined}>
       <InputGroup my="1rem">
         <CKInput {...inputProps} ref={ref} />
-        <FormLabel htmlFor={label}>{label}</FormLabel>
+        <FormLabel htmlFor={id}>{label}</FormLabel>
         <InputRightElement pointerEvents="none">
           {errorMessage !== undefined ? (
             <Icon as={FaEdit} color="red.400" />
