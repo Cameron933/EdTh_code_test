@@ -32,7 +32,7 @@ type StudentDetailsModalProps = {
 
 const StudentDetailsModal = ({ student, isOpen, onClose }: StudentDetailsModalProps) => {
   const { firstName, lastName } = formConfig;
-  const { isLoading, isUpdating, studentProfile, updateStudentInfo } = useStudentDetailsModal(
+  const { isLoading, isUpdating, studentProfile, updateStudentPayload } = useStudentDetailsModal(
     student?.id
   );
   const { register, formState, handleSubmit, reset, watch } = useForm<StudentInfoFormData>({
@@ -55,7 +55,7 @@ const StudentDetailsModal = ({ student, isOpen, onClose }: StudentDetailsModalPr
         first_name: formData.firstName,
         last_name: formData.lastName,
       };
-      updateStudentInfo(editedStudentInfo);
+      updateStudentPayload(editedStudentInfo);
     }
   });
 

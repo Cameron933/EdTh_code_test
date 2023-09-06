@@ -8,7 +8,7 @@ type UseStudentDetailsModalReturnType = {
   isLoading: boolean;
   isUpdating: boolean;
   studentProfile?: StudentProfile;
-  updateStudentInfo: (editedStudentInfo: StudentInfo) => Promise<void>;
+  updateStudentPayload: (editedStudentInfo: StudentInfo) => Promise<void>;
 };
 
 const useStudentDetailsModal = (
@@ -39,7 +39,7 @@ const useStudentDetailsModal = (
     }
   }, [studentId, toast]);
 
-  const updateStudentInfo = async (editedStudentInfo: StudentInfo) => {
+  const updateStudentPayload = async (editedStudentInfo: StudentInfo) => {
     try {
       setIsUpdating(true);
       await axios.patch(`${process.env.REACT_APP_UPDATE_TABLE_DATA}${editedStudentInfo.id}`, {
@@ -70,7 +70,7 @@ const useStudentDetailsModal = (
     fetchStudentProfile();
   }, [fetchStudentProfile]);
 
-  return { isLoading, isUpdating, studentProfile, updateStudentInfo };
+  return { isLoading, isUpdating, studentProfile, updateStudentPayload };
 };
 
 export default useStudentDetailsModal;
