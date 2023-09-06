@@ -17,10 +17,7 @@ import LoadingTable from "./LoadingTable";
 
 const StudentTable = () => {
   const [selectedStudent, setSelectedStudent] = useState<StudentInfo>();
-  const [data, setData] = useState<StudentInfoFormData>({
-    firstName: "",
-    lastName: "",
-  });
+
   const { studentInfo, isLoading } = useStudentTable();
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -60,13 +57,7 @@ const StudentTable = () => {
         </Table>
 
         {selectedStudent && (
-          <StudentDetailsModal
-            student={selectedStudent}
-            isOpen={isOpen}
-            onClose={onClose}
-            data={data}
-            setData={setData}
-          />
+          <StudentDetailsModal student={selectedStudent} isOpen={isOpen} onClose={onClose} />
         )}
       </VStack>
     </TableContainer>

@@ -29,7 +29,7 @@ export const FormGroupInput = React.forwardRef(function FormGroupInput(
   return (
     <FormControl variant="floating" id={id} isInvalid={errorMessage !== undefined}>
       <InputGroup my="1rem">
-        <CKInput {...inputProps} ref={ref} onChange={(e) => console.log(e.target.value)} />
+        <CKInput {...inputProps} ref={ref} />
         <FormLabel htmlFor={label}>{label}</FormLabel>
         <InputRightElement pointerEvents="none">
           {errorMessage !== undefined ? (

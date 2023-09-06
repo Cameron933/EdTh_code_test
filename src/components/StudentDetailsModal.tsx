@@ -18,7 +18,6 @@ import {
   VStack,
   StackDivider,
   FormControl,
-  Input,
 } from "@chakra-ui/react";
 import useStudentDetailsModal from "../services/useStudentDetailsModal";
 import LoadingModal from "./LoadingModal";
@@ -29,24 +28,29 @@ type StudentDetailsModalProps = {
   student?: StudentInfo;
   isOpen: boolean;
   onClose: () => void;
-  data: StudentInfoFormData;
-  setData: Dispatch<SetStateAction<StudentInfoFormData>>;
 };
 
 const StudentDetailsModal = ({ student, isOpen, onClose }: StudentDetailsModalProps) => {
   const { firstName, lastName } = formConfig;
+  const [data, setData] = useState<StudentInfoFormData>({
+    firstName: "",
+    lastName: "",
+  });
   const { isLoading, isUpdating, studentProfile, updateStudentInfo } = useStudentDetailsModal(
     student?.id
   );
-  const { register, formState, handleSubmit, reset } = useForm<StudentInfoFormData>({
+  const { register, formState, handleSubmit, reset, watch } = useForm<StudentInfoFormData>({
     defaultValues: {
-      firstName: "",
-      lastName: "",
+      firstName: student?.first_name,
+      lastName: student?.last_name,
     },
     mode: "all",
     reValidateMode: "onChange",
     resolver: yupResolver(StudentInfoFormSchema),
   });
+
+  const watchedValues = watch();
+  console.log(watchedValues);
 
   const onSubmit = handleSubmit((formData) => {
     if (student) {
@@ -91,12 +95,11 @@ const StudentDetailsModal = ({ student, isOpen, onClose }: StudentDetailsModalPr
                       alt={`student pic of ${student.first_name} ${student.last_name}`}
                     />
                   </Flex>
-                  <Input {...register("firstName")} defaultValue={student?.first_name} />
-                  {/* <FormGroupInput
+                  <FormGroupInput
                     {...firstName}
                     {...register("firstName")}
                     errorMessage={formState.errors.firstName?.message}
-                  /> */}
+                  />
                   <FormGroupInput
                     {...lastName}
                     {...register("lastName")}
