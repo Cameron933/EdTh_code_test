@@ -96,17 +96,11 @@ const StudentDetailsModal = ({ student, isOpen, onClose }: StudentDetailsModalPr
                     {...firstName}
                     {...register("firstName")}
                     errorMessage={formState.errors.firstName?.message}
-                    onChange={(e) => {
-                      setStudentFirstName(e.target.value);
-                    }}
                   />
                   <FormGroupInput
                     {...lastName}
                     {...register("lastName")}
                     errorMessage={formState.errors.lastName?.message}
-                    onChange={(e) => {
-                      setStudentLastName(e.target.value);
-                    }}
                   />
 
                   <VStack
