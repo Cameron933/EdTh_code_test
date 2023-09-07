@@ -17,7 +17,6 @@ import LoadingTable from "./LoadingTable";
 
 const StudentTable = () => {
   const [selectedStudent, setSelectedStudent] = useState<StudentInfo>();
-  const [refreshKey, setRefreshKey] = useState<number>(0);
   const [studentArray, setStudentArray] = useState<StudentInfo[]>();
   const { studentInfo, isLoading } = useStudentTable();
 
@@ -26,10 +25,6 @@ const StudentTable = () => {
   const handleRowClick = (student: StudentInfo) => {
     setSelectedStudent(student);
     onOpen();
-  };
-
-  const handleStudentUpdated = () => {
-    setRefreshKey((prevKey) => prevKey + 1);
   };
 
   useEffect(() => {
@@ -69,12 +64,7 @@ const StudentTable = () => {
         </Table>
 
         {selectedStudent && (
-          <StudentDetailsModal
-            student={selectedStudent}
-            isOpen={isOpen}
-            onClose={onClose}
-            onUpdated={handleStudentUpdated}
-          />
+          <StudentDetailsModal student={selectedStudent} isOpen={isOpen} onClose={onClose} />
         )}
       </VStack>
     </TableContainer>

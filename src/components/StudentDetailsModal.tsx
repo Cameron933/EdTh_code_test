@@ -29,10 +29,9 @@ type StudentDetailsModalProps = {
   student?: StudentInfo;
   isOpen: boolean;
   onClose: () => void;
-  onUpdated: () => void;
 };
 
-const StudentDetailsModal = ({ student, isOpen, onClose, onUpdated }: StudentDetailsModalProps) => {
+const StudentDetailsModal = ({ student, isOpen, onClose }: StudentDetailsModalProps) => {
   const { firstName, lastName } = formConfig;
   const { isLoading, isUpdating, studentProfile, updateStudentPayload } = useStudentDetailsModal(
     student?.id
@@ -47,9 +46,6 @@ const StudentDetailsModal = ({ student, isOpen, onClose, onUpdated }: StudentDet
     resolver: yupResolver(StudentInfoFormSchema),
   });
 
-  // const watchedValues = watch();
-  // console.log(watchedValues);
-
   const onSubmit = handleSubmit((formData) => {
     if (student) {
       const editedStudentInfo: StudentInfo = {
@@ -57,9 +53,7 @@ const StudentDetailsModal = ({ student, isOpen, onClose, onUpdated }: StudentDet
         first_name: formData.firstName,
         last_name: formData.lastName,
       };
-      updateStudentPayload(editedStudentInfo).then(() => {
-        if (onUpdated) onUpdated();
-      });
+      updateStudentPayload(editedStudentInfo);
     }
   });
 

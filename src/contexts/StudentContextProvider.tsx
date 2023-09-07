@@ -1,16 +1,11 @@
-import axios, { AxiosError } from "axios";
-import dateFormatter from "../utils/dateTimeFomatter";
-import { useState, useEffect, useCallback } from "react";
-import { useToast } from "@chakra-ui/react";
+import React, { useState, useCallback } from "react";
 import axiosErrorHelper from "../utils/axiosErrorHelper";
+import axios, { AxiosError } from "axios";
+import { useToast } from "@chakra-ui/react";
+import dateFormatter from "../utils/dateTimeFomatter";
+import { StudentContext } from "./StudentContext";
 
-type UseStudentTableReturnType = {
-  studentInfo: StudentInfo[];
-  isLoading: boolean;
-  fetchStudentsInfo: () => Promise<void>;
-};
-
-const useStudentTable = (): UseStudentTableReturnType => {
+const StudentContextProvider = ({ children }: any) => {
   const [studentInfo, setStudentInfo] = useState<StudentInfo[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const toast = useToast();
@@ -34,11 +29,11 @@ const useStudentTable = (): UseStudentTableReturnType => {
     }
   }, [studentInfo]);
 
-  useEffect(() => {
-    fetchStudentsInfo();
-  }, []);
-
-  return { studentInfo, isLoading, fetchStudentsInfo };
+  return (
+    <StudentContext.Provider value={{ studentInfo, isLoading, fetchStudentsInfo }}>
+      {children}
+    </StudentContext.Provider>
+  );
 };
 
-export default useStudentTable;
+export default StudentContextProvider;
