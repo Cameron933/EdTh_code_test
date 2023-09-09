@@ -2,7 +2,8 @@ import axios, { AxiosError } from "axios";
 import { useState, useEffect, useCallback } from "react";
 import { useToast } from "@chakra-ui/react";
 import axiosErrorHelper from "../utils/axiosErrorHelper";
-import useStudentTable from "./useStudentTable";
+import { useStudentInfoStore } from "../hooks/useStudentInfoStore";
+// import useStudentTable from "./useStudentTable";
 
 type UseStudentDetailsModalReturnType = {
   isLoading: boolean;
@@ -19,7 +20,7 @@ const useStudentDetailsModal = (
   const [studentProfile, setStudentProfile] = useState<StudentProfile>();
   const toast = useToast();
 
-  const { fetchStudentsInfo } = useStudentTable();
+  const { fetchStudentsInfo } = useStudentInfoStore();
 
   const fetchStudentProfile = useCallback(async () => {
     if (!studentId) return;

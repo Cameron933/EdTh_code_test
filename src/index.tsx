@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-import StudentContextProvider from "./contexts/StudentContextProvider";
 
 const rootElement = document.getElementById("root");
 const activeLabelStyles = {
@@ -39,9 +38,7 @@ if (rootElement) {
   root.render(
     <React.StrictMode>
       <ChakraProvider theme={theme}>
-        <StudentContextProvider>
-          <App />
-        </StudentContextProvider>
+        <App />
       </ChakraProvider>
     </React.StrictMode>
   );

@@ -12,14 +12,13 @@ import {
 } from "@chakra-ui/react";
 import StudentDetailsModal from "./StudentDetailsModal";
 import StudentTableRow from "./StudentTableRow";
-import useStudentTable from "../services/useStudentTable";
+// import useStudentTable from "../services/useStudentTable";
 import LoadingTable from "./LoadingTable";
+import { useStudentInfoStore } from "../hooks/useStudentInfoStore";
 
 const StudentTable = () => {
   const [selectedStudent, setSelectedStudent] = useState<StudentInfo>();
-  const [studentArray, setStudentArray] = useState<StudentInfo[]>();
-  const { studentInfo, isLoading } = useStudentTable();
-
+  const { studentInfo, isLoading, fetchStudentsInfo } = useStudentInfoStore();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleRowClick = (student: StudentInfo) => {
@@ -29,11 +28,11 @@ const StudentTable = () => {
 
   useEffect(() => {
     console.log("update");
-    if (studentInfo) {
-      setStudentArray(studentInfo);
-    }
-  }, [studentInfo]);
-  if (!studentArray) return <React.Fragment></React.Fragment>;
+    fetchStudentsInfo();
+  }, []);
+
+  if (!studentInfo) return <React.Fragment></React.Fragment>;
+
   return (
     <TableContainer>
       <VStack>
@@ -52,7 +51,7 @@ const StudentTable = () => {
             {isLoading ? (
               <LoadingTable />
             ) : (
-              studentArray.map((student) => (
+              studentInfo.map((student) => (
                 <StudentTableRow
                   key={student.id}
                   student={student}

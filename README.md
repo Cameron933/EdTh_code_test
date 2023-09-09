@@ -41,7 +41,7 @@ frontend/
 ### 🤔 Assumptions
 
 - All users of this system are teachers. Hence, there's no need for authentication and login functionalities.
-- No error handling for backend-related errors is necessary.
+- No error handling for backend-related authentication errors is necessary.
 
 ### 🤓 How to set up this repo?
 
@@ -60,6 +60,7 @@ Then you all set!
 - Jest
 - Chakra UI
 - Typescript
+- Zustand
 
 ### 🏗️ Building the Project
 
