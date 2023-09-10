@@ -19,7 +19,7 @@ import {
   StackDivider,
   FormControl,
 } from "@chakra-ui/react";
-import useStudentDetailsModal from "../services/useStudentDetailsModal";
+import useStudentDetailsModal from "../hooks/useStudentDetailsModal";
 import LoadingModal from "./LoadingModal";
 import { FormGroupInput } from "./Input/FormGroupInput";
 import { StudentInfoFormSchema } from "./StudentInfoForm.schema";

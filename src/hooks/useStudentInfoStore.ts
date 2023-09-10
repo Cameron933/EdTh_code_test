@@ -1,7 +1,6 @@
 import { create } from "zustand";
 import dateFormatter from "../utils/dateTimeFomatter";
 import axios, { AxiosError } from "axios";
-import { useToast } from "@chakra-ui/react";
 
 type UseStudentContextType = {
   studentInfo: StudentInfo[];
@@ -37,7 +36,3 @@ export const useStudentInfoStore = create<UseStudentContextType>((set) => ({
     }
   },
 }));
-
-const useStudentInfo = () => {
-  const toast = useToast();
-};
