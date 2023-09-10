@@ -9,26 +9,33 @@ import {
   TableContainer,
   useDisclosure,
   VStack,
+  useToast,
 } from "@chakra-ui/react";
 import StudentDetailsModal from "./StudentDetailsModal";
 import StudentTableRow from "./StudentTableRow";
-// import useStudentTable from "../services/useStudentTable";
 import LoadingTable from "./LoadingTable";
 import { useStudentInfoStore } from "../hooks/useStudentInfoStore";
+import { AxiosError } from "axios";
+import axiosErrorHelper from "../utils/axiosErrorHelper";
 
 const StudentTable = () => {
   const [selectedStudent, setSelectedStudent] = useState<StudentInfo>();
   const { studentInfo, isLoading, fetchStudentsInfo } = useStudentInfoStore();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast();
 
   const handleRowClick = (student: StudentInfo) => {
     setSelectedStudent(student);
     onOpen();
   };
 
+  const handleError = (error: AxiosError) => {
+    axiosErrorHelper(error, toast);
+  };
+
   useEffect(() => {
     console.log("update");
-    fetchStudentsInfo();
+    fetchStudentsInfo(handleError);
   }, []);
 
   if (!studentInfo) return <React.Fragment></React.Fragment>;

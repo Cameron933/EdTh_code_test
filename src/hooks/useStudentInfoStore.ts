@@ -6,13 +6,13 @@ import { useToast } from "@chakra-ui/react";
 type UseStudentContextType = {
   studentInfo: StudentInfo[];
   isLoading: boolean;
-  fetchStudentsInfo: () => Promise<void>;
+  fetchStudentsInfo: (handleError: (error: AxiosError) => void) => Promise<void>;
 };
 
 export const useStudentInfoStore = create<UseStudentContextType>((set) => ({
   isLoading: false,
   studentInfo: [],
-  fetchStudentsInfo: async () => {
+  fetchStudentsInfo: async (errorHandler) => {
     set(() => ({
       isLoading: true,
     }));
@@ -26,7 +26,9 @@ export const useStudentInfoStore = create<UseStudentContextType>((set) => ({
       set(() => ({ studentInfo: dobFormattedStudentsInfo }));
     } catch (error) {
       if (error instanceof AxiosError) {
-        console.log("error");
+        if (error instanceof AxiosError) {
+          errorHandler(error);
+        }
       }
     } finally {
       set(() => ({
