@@ -25,10 +25,8 @@ export const useStudentInfoStore = create<UseStudentContextType>((set) => ({
       }));
       console.log("fetching");
       set(() => ({ studentInfo: dobFormattedStudentsInfo }));
-      toast.dismiss();
     } catch (error) {
       if (error instanceof AxiosError) {
-        toast.dismiss();
         axiosErrorHelper(error);
       }
     } finally {
