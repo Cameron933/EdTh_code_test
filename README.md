@@ -59,6 +59,7 @@ Then you all set!
 - React testing library
 - Jest
 - Chakra UI
+- React-hot-toast
 - Typescript
 - Zustand
 
