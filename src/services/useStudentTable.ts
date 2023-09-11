@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
 import dateFormatter from "../utils/dateTimeFomatter";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { useToast } from "@chakra-ui/react";
 import axiosErrorHelper from "../utils/axiosErrorHelper";
 
@@ -15,7 +15,7 @@ const useStudentTable = (): UseStudentTableReturnType => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const toast = useToast();
 
-  const fetchStudentsInfo = useCallback(async () => {
+  const fetchStudentsInfo = async () => {
     setIsLoading(true);
     try {
       const response = await axios.get(`${process.env.REACT_APP_STUDENT_TABLE_DATA}`);
@@ -31,7 +31,7 @@ const useStudentTable = (): UseStudentTableReturnType => {
     } finally {
       setIsLoading(false);
     }
-  }, [toast]);
+  };
 
   const updateStudentInfo = async (editedStudentInfo: StudentInfo) => {
     try {
