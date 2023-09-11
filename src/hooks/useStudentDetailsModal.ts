@@ -1,8 +1,8 @@
 import axios, { AxiosError } from "axios";
 import { useState, useEffect, useCallback } from "react";
-import { useToast } from "@chakra-ui/react";
 import axiosErrorHelper from "../utils/axiosErrorHelper";
 import { useStudentInfoStore } from "./useStudentInfoStore";
+import toast from "react-hot-toast";
 
 type UseStudentDetailsModalReturnType = {
   isLoading: boolean;
@@ -17,13 +17,8 @@ const useStudentDetailsModal = (
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
   const [studentProfile, setStudentProfile] = useState<StudentProfile>();
-  const toast = useToast();
 
   const { fetchStudentsInfo } = useStudentInfoStore();
-
-  const handleError = (error: AxiosError) => {
-    axiosErrorHelper(error, toast);
-  };
 
   const fetchStudentProfile = useCallback(async () => {
     if (!studentId) return;
@@ -36,12 +31,12 @@ const useStudentDetailsModal = (
       }
     } catch (error) {
       if (error instanceof AxiosError) {
-        axiosErrorHelper(error, toast);
+        axiosErrorHelper(error);
       }
     } finally {
       setIsLoading(false);
     }
-  }, [studentId, toast]);
+  }, [studentId]);
 
   const updateStudentPayload = async (editedStudentInfo: StudentInfo) => {
     try {
@@ -50,20 +45,10 @@ const useStudentDetailsModal = (
         first_name: editedStudentInfo.first_name,
         last_name: editedStudentInfo.last_name,
       });
-
-      toast({
-        title: "Update completed",
-        description: "Now we will try to update all information from server again",
-        status: "info",
-        duration: 6000,
-        position: "bottom",
-        isClosable: true,
-      });
-
-      fetchStudentsInfo(handleError);
+      fetchStudentsInfo();
     } catch (error) {
       if (error instanceof AxiosError) {
-        axiosErrorHelper(error, toast);
+        axiosErrorHelper(error);
       }
     } finally {
       setIsUpdating(false);

@@ -1,17 +1,19 @@
 import { create } from "zustand";
 import dateFormatter from "../utils/dateTimeFomatter";
 import axios, { AxiosError } from "axios";
+import axiosErrorHelper from "../utils/axiosErrorHelper";
+import toast from "react-hot-toast";
 
 type UseStudentContextType = {
   studentInfo: StudentInfo[];
   isLoading: boolean;
-  fetchStudentsInfo: (handleError: (error: AxiosError) => void) => Promise<void>;
+  fetchStudentsInfo: () => Promise<void>;
 };
 
 export const useStudentInfoStore = create<UseStudentContextType>((set) => ({
   isLoading: false,
   studentInfo: [],
-  fetchStudentsInfo: async (errorHandler) => {
+  fetchStudentsInfo: async () => {
     set(() => ({
       isLoading: true,
     }));
@@ -23,11 +25,11 @@ export const useStudentInfoStore = create<UseStudentContextType>((set) => ({
       }));
       console.log("fetching");
       set(() => ({ studentInfo: dobFormattedStudentsInfo }));
+      toast.dismiss();
     } catch (error) {
       if (error instanceof AxiosError) {
-        if (error instanceof AxiosError) {
-          errorHandler(error);
-        }
+        toast.dismiss();
+        axiosErrorHelper(error);
       }
     } finally {
       set(() => ({
