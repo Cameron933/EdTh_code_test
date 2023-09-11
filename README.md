@@ -14,15 +14,20 @@ frontend/
 | |-- index.html
 |-- src/
 | |-- components/
+| | |-- formConfig.ts
 | | |-- LoadingModal.tsx
+| | |-- LoadingTable.tsx
 | | |-- StudentDetailsModal.tsx
+| | |-- StudentInfoFrom.schema.ts
 | | |-- StudentTable.tsx
 | | |-- StudentTableRow.tsx
+| | | |-- Input/
+| | | |-- FormGroupInput.tsx
 | |-- interfaces/
 | | |-- student.d.ts
 | |-- services/
 | | |-- useStudentDetailsModal.ts
-| | |-- useStudentTable.ts
+| | |-- useStudentInfoStore.ts
 | |-- utils/
 | | |-- axiosErrorHelper.ts
 | | |-- dateTimeFomatter.ts

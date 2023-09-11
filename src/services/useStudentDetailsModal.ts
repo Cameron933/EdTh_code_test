@@ -2,7 +2,6 @@ import axios, { AxiosError } from "axios";
 import { useState, useEffect, useCallback } from "react";
 import axiosErrorHelper from "../utils/axiosErrorHelper";
 import { useStudentInfoStore } from "./useStudentInfoStore";
-import toast from "react-hot-toast";
 
 type UseStudentDetailsModalReturnType = {
   isLoading: boolean;

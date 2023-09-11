@@ -13,8 +13,8 @@ import {
 import StudentDetailsModal from "./StudentDetailsModal";
 import StudentTableRow from "./StudentTableRow";
 import LoadingTable from "./LoadingTable";
-import { useStudentInfoStore } from "../hooks/useStudentInfoStore";
-import toast, { Toaster } from "react-hot-toast";
+import { useStudentInfoStore } from "../services/useStudentInfoStore";
+import { Toaster } from "react-hot-toast";
 
 const StudentTable = () => {
   const [selectedStudent, setSelectedStudent] = useState<StudentInfo>();
