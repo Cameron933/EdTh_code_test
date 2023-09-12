@@ -31,7 +31,7 @@ const useStudentDetailsModal = (
     } finally {
       setIsLoading(false);
     }
-  }, [studentId, toast]);
+  }, [studentId]);
 
   useEffect(() => {
     fetchStudentProfile();
