@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   Thead,
@@ -8,18 +8,17 @@ import {
   TableCaption,
   TableContainer,
   useDisclosure,
-  Spinner,
   VStack,
 } from "@chakra-ui/react";
 import StudentDetailsModal from "./StudentDetailsModal";
 import StudentTableRow from "./StudentTableRow";
-import useStudentTable from "../services/useStudentTable";
+import LoadingTable from "./LoadingTable";
+import { useStudentInfoStore } from "../services/useStudentInfoStore";
+import { Toaster } from "react-hot-toast";
 
 const StudentTable = () => {
-  const { studentInfo, isLoading, updateStudentInfo } = useStudentTable();
-
   const [selectedStudent, setSelectedStudent] = useState<StudentInfo>();
-
+  const { studentInfo, isLoading, fetchStudentsInfo } = useStudentInfoStore();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleRowClick = (student: StudentInfo) => {
@@ -27,13 +26,18 @@ const StudentTable = () => {
     onOpen();
   };
 
-  return isLoading ? (
-    <Spinner thickness="4px" speed="0.65s" emptyColor="gray.200" color="blue.500" size="xl" />
-  ) : (
+  useEffect(() => {
+    console.log("update");
+    fetchStudentsInfo();
+  }, []);
+
+  if (!studentInfo) return <React.Fragment></React.Fragment>;
+
+  return (
     <TableContainer>
       <VStack>
         <Table variant="simple" color="white">
-          <TableCaption textColor="gray.900">
+          <TableCaption textColor="whiteAlpha.900">
             View and update student details by clicking the row
           </TableCaption>
           <Thead bg="white">
@@ -44,23 +48,22 @@ const StudentTable = () => {
             </Tr>
           </Thead>
           <Tbody>
-            {studentInfo.map((student) => (
-              <StudentTableRow
-                key={student.id}
-                student={student}
-                onRowClick={() => handleRowClick(student)}
-              />
-            ))}
+            {isLoading ? (
+              <LoadingTable />
+            ) : (
+              studentInfo.map((student) => (
+                <StudentTableRow
+                  key={student.id}
+                  student={student}
+                  onRowClick={() => handleRowClick(student)}
+                />
+              ))
+            )}
           </Tbody>
         </Table>
-
+        <Toaster position="bottom-center" reverseOrder={false} />
         {selectedStudent && (
-          <StudentDetailsModal
-            student={selectedStudent}
-            isOpen={isOpen}
-            onClose={onClose}
-            onSaveEdit={updateStudentInfo}
-          />
+          <StudentDetailsModal student={selectedStudent} isOpen={isOpen} onClose={onClose} />
         )}
       </VStack>
     </TableContainer>

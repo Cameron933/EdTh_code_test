@@ -1,15 +1,43 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 
 const rootElement = document.getElementById("root");
+const activeLabelStyles = {
+  transform: "scale(0.85) translateY(-24px)",
+};
+const theme = extendTheme({
+  components: {
+    Form: {
+      variants: {
+        floating: {
+          container: {
+            label: {
+              top: 0,
+              left: 0,
+              zIndex: 2,
+              position: "absolute",
+              backgroundColor: "white",
+              pointerEvents: "none",
+              mx: 3,
+              px: 1,
+              my: 2,
+              transformOrigin: "left top",
+              ...activeLabelStyles,
+            },
+          },
+        },
+      },
+    },
+  },
+});
 
 if (rootElement) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <React.StrictMode>
-      <ChakraProvider>
+      <ChakraProvider theme={theme}>
         <App />
       </ChakraProvider>
     </React.StrictMode>

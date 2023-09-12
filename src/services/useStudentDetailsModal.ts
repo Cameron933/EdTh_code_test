@@ -1,19 +1,23 @@
 import axios, { AxiosError } from "axios";
 import { useState, useEffect, useCallback } from "react";
-import { useToast } from "@chakra-ui/react";
 import axiosErrorHelper from "../utils/axiosErrorHelper";
+import { useStudentInfoStore } from "./useStudentInfoStore";
 
 type UseStudentDetailsModalReturnType = {
   isLoading: boolean;
+  isUpdating: boolean;
   studentProfile?: StudentProfile;
+  updateStudentPayload: (editedStudentInfo: StudentInfo) => Promise<void>;
 };
 
 const useStudentDetailsModal = (
   studentId: number | undefined
 ): UseStudentDetailsModalReturnType => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isUpdating, setIsUpdating] = useState<boolean>(false);
   const [studentProfile, setStudentProfile] = useState<StudentProfile>();
-  const toast = useToast();
+
+  const { fetchStudentsInfo } = useStudentInfoStore();
 
   const fetchStudentProfile = useCallback(async () => {
     if (!studentId) return;
@@ -26,7 +30,7 @@ const useStudentDetailsModal = (
       }
     } catch (error) {
       if (error instanceof AxiosError) {
-        axiosErrorHelper(error, toast);
+        axiosErrorHelper(error);
       }
     } finally {
       setIsLoading(false);
@@ -37,7 +41,7 @@ const useStudentDetailsModal = (
     fetchStudentProfile();
   }, [fetchStudentProfile]);
 
-  return { isLoading, studentProfile };
+  return { isLoading, isUpdating, studentProfile, updateStudentPayload };
 };
 
 export default useStudentDetailsModal;

@@ -14,15 +14,20 @@ frontend/
 | |-- index.html
 |-- src/
 | |-- components/
+| | |-- formConfig.ts
 | | |-- LoadingModal.tsx
+| | |-- LoadingTable.tsx
 | | |-- StudentDetailsModal.tsx
+| | |-- StudentInfoFrom.schema.ts
 | | |-- StudentTable.tsx
 | | |-- StudentTableRow.tsx
+| | | |-- Input/
+| | | |-- FormGroupInput.tsx
 | |-- interfaces/
 | | |-- student.d.ts
 | |-- services/
 | | |-- useStudentDetailsModal.ts
-| | |-- useStudentTable.ts
+| | |-- useStudentInfoStore.ts
 | |-- utils/
 | | |-- axiosErrorHelper.ts
 | | |-- dateTimeFomatter.ts
@@ -41,7 +46,7 @@ frontend/
 ### 🤔 Assumptions
 
 - All users of this system are teachers. Hence, there's no need for authentication and login functionalities.
-- No error handling for backend-related errors is necessary.
+- No error handling for backend-related authentication errors is necessary.
 
 ### 🤓 How to set up this repo?
 
@@ -59,7 +64,9 @@ Then you all set!
 - React testing library
 - Jest
 - Chakra UI
+- React-hot-toast
 - Typescript
+- Zustand
 
 ### 🏗️ Building the Project
 
@@ -93,8 +100,8 @@ npm run start
 | Framework          | `react`                         |
 | BootStrapper       | `create-react-app`              |
 | Scripting Language | `typescript`                    |
-| Styling            | chakra-ui                       |
-| State-Management   | (TBD)                           |
+| Styling            | `chakra-ui`                     |
+| State-Management   | `zustand`                       |
 | Testing            | `jest`, `react-testing-library` |
 | Localisation       | (TBD)                           |
 | Code Control       | `eslint`, `prettier`            |
