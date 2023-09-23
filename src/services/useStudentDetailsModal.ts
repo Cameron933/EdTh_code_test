@@ -37,23 +37,6 @@ const useStudentDetailsModal = (
     }
   }, [studentId]);
 
-  const updateStudentPayload = async (editedStudentInfo: StudentInfo) => {
-    try {
-      setIsUpdating(true);
-      await axios.patch(`${process.env.REACT_APP_UPDATE_TABLE_DATA}${editedStudentInfo.id}`, {
-        first_name: editedStudentInfo.first_name,
-        last_name: editedStudentInfo.last_name,
-      });
-      fetchStudentsInfo();
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        axiosErrorHelper(error);
-      }
-    } finally {
-      setIsUpdating(false);
-    }
-  };
-
   useEffect(() => {
     fetchStudentProfile();
   }, [fetchStudentProfile]);
